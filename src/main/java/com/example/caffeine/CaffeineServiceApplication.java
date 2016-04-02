@@ -79,6 +79,8 @@ public class CaffeineServiceApplication extends WebSecurityConfigurerAdapter {
             if (jdbc.queryForObject("SELECT COUNT(*) FROM caches WHERE service_id = ?", Integer.class, serviceId) == 0) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
+            credentials.invalidate(serviceId);
+            caches.remove(serviceId);
             jdbc.update("DELETE FROM credentials WHERE service_id = ?", serviceId);
             jdbc.update("DELETE FROM caches WHERE service_id = ?", serviceId);
             return ResponseEntity.noContent().build();
@@ -110,8 +112,8 @@ public class CaffeineServiceApplication extends WebSecurityConfigurerAdapter {
             if (jdbc.queryForObject("SELECT COUNT(*) FROM credentials WHERE service_id = ?", Integer.class, serviceId) == 0) {
                 return ResponseEntity.notFound().build();
             }
-            if (caches.containsKey(serviceId)) {
-                caches.get(serviceId).invalidate(username);
+            if (credentials.get(serviceId) != null) {
+                credentials.get(serviceId).invalidate(username);
             }
             jdbc.update("DELETE FROM credentials WHERE service_id = ? AND username = ?", serviceId, username);
             return ResponseEntity.noContent().build();
