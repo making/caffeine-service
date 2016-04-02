@@ -1,0 +1,7 @@
+---
+applications:
+- name: caffeine-service
+  memory: 512M
+  path: target/caffeine-service-0.0.1-SNAPSHOT.jar
+  services:
+    - caffeine-credentials
