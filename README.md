@@ -1,6 +1,6 @@
 [Caffeine](https://github.com/ben-manes/caffeine) as a Service
 
-### Deploy Service
+### Run locally
 
 ``` console
 $ ./mvnw clean package
