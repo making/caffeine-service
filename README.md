@@ -188,3 +188,5 @@ $ curl -v -u db5d3d51-8e19-4766-b478-5efd0ea3923f:69739cd5-13d7-4938-b96d-c090fe
 $ cf cs p-mysql 512mb caffeine-credentials
 $ cf push -b java_buildpack
 ```
+
+Deploy [caffeine-broker](https://github.com/making/caffeine-broker)
